@@ -35,6 +35,7 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.6;
+  transition: background-color .25s ease, color .25s ease;
 }
 
 .container {
@@ -128,6 +129,7 @@ body {
   border-radius: 14px;
   padding: 14px;
   box-shadow: var(--shadow);
+  min-height: 88px;
 }
 .skill-icon {
   width: 44px; height: 44px;
@@ -136,6 +138,7 @@ body {
   background: rgba(9,27,158,.08);
   color: var(--primary);
   font-size: 22px;
+  flex: 0 0 44px;
 }
 .skill-info { flex: 1; }
 .skill-header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
@@ -153,6 +156,8 @@ body {
   display: block;
   height: 100%;
   background: linear-gradient(90deg, var(--primary), var(--blue));
+  width: 0;
+  transition: width 1s ease;
 }
 
 /* Отзывы: карусель */
@@ -178,6 +183,25 @@ body {
 .testimonial.card { border-radius: 16px; }
 .testimonial-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .testimonial-avatar { border-radius: 50%; border: 1px solid var(--border); }
+.back-to-top {
+  position: fixed;
+  right: 16px; bottom: 16px;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  border: 0;
+  background: linear-gradient(135deg, var(--primary), var(--blue));
+  color: #fff;
+  box-shadow: var(--shadow);
+  opacity: 0; transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Плавное появление секций */
+.reveal-on-scroll { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.reveal-on-scroll.revealed { opacity: 1; transform: none; }
 .testimonial-name { font-weight: 700; }
 .testimonial-role { color: var(--muted); font-size: 14px; }
 
@@ -270,6 +294,7 @@ body {
 .contact-form .button { margin-top: 12px; }
 .form-note { margin-left: 12px; display: inline-block; opacity: 0; transition: opacity .2s ease; white-space: pre-line; color: var(--primary); font-weight: 600; }
 .form-note.show { opacity: 1; }
+.form-note.error { color: #d1433f; }
 
 .site-footer {
   padding: 32px 0;

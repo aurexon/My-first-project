@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(TESTIMONIALS_KEY, JSON.stringify(arr));
   };
   const renderTestimonial = ({ name, role, text, avatar }) => {
-    const li = document.createElement('li');
     li.className = 'testimonial card';
     li.setAttribute('aria-roledescription', 'slide');
     li.innerHTML = `
@@ -114,21 +113,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
   testimonialForm && testimonialForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('t-name').value.trim() || 'Аноним';
-    const role = document.getElementById('t-role').value.trim() || '';
-    const avatar = document.getElementById('t-avatar').value.trim();
-    const text = document.getElementById('t-text').value.trim();
-    if (!text) return;
+    const note = testimonialForm.querySelector('.form-note');
+    const setNote = (msg, isError=false) => {
+      if (!note) return;
+      note.textContent = msg;
+      note.classList.toggle('error', !!isError);
+      note.classList.add('show');
+      setTimeout(() => note.classList.remove('show'), 3000);
+    };
+
+    // HTML5-валидация
+    if (!testimonialForm.checkValidity()) {
+      testimonialForm.reportValidity();
+      setNote('Проверьте корректность полей.', true);
+      return;
+    }
+
+    const nameInput = document.getElementById('t-name');
+    const roleInput = document.getElementById('t-role');
+    const avatarInput = document.getElementById('t-avatar');
+    const textInput = document.getElementById('t-text');
+
+    const name = (nameInput.value || '').trim();
+    const role = (roleInput.value || '').trim();
+    const avatarRaw = (avatarInput.value || '').trim();
+    const text = (textInput.value || '').trim();
+
+    // Доп. проверки
+    if (name.length < 2) { setNote('Имя слишком короткое.', true); nameInput.focus(); return; }
+    if (text.length < 5) { setNote('Текст отзыва слишком короткий.', true); textInput.focus(); return; }
+
+    let avatar = '';
+    if (avatarRaw) {
+      try {
+        const u = new URL(avatarRaw);
+        avatar = u.href;
+      } catch {
+        setNote('Ссылка на аватар некорректна.', true); avatarInput.focus(); return;
+      }
+    }
+
     const item = { name, role, avatar, text };
     const list = loadTestimonials();
     list.push(item);
     saveTestimonials(list);
+
     if (track) {
       const node = renderTestimonial(item);
       track.appendChild(node);
     }
-    const note = testimonialForm.querySelector('.form-note');
-    if (note) { note.textContent = 'Спасибо! Отзыв добавлен.'; note.classList.add('show'); setTimeout(()=>note.classList.remove('show'), 3000); }
+
+    setNote('Спасибо! Отзыв добавлен.');
     testimonialForm.reset();
   });
 
@@ -203,6 +238,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Анимация прогресс-баров навыков и появление
+  const skillProgressBars = document.querySelectorAll('.skill-bar .skill-progress');
+  const revealables = document.querySelectorAll('.section, .card, .skill-card, .interest-card, .testimonial');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // Прогресс-бары внутри секции
+        entry.target.querySelectorAll && entry.target.querySelectorAll('.skill-bar[aria-valuenow]').forEach((bar) => {
+          const now = parseInt(bar.getAttribute('aria-valuenow'), 10);
+          const prog = bar.querySelector('.skill-progress');
+          if (prog && !prog.dataset.animated) {
+            prog.style.width = Math.max(0, Math.min(100, now)) + '%';
+            prog.dataset.animated = '1';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  revealables.forEach((el) => { el.classList.add('reveal-on-scroll'); revealObserver.observe(el); });
+
+  // Кнопка «вверх»
+  const backToTop = document.querySelector('.back-to-top');
+  const onScrollTopBtn = () => {
+    if (!backToTop) return;
+    if (window.scrollY > 560) backToTop.classList.add('show'); else backToTop.classList.remove('show');
+  };
+  window.addEventListener('scroll', onScrollTopBtn, { passive: true });
+  backToTop && backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Фолбэк для изображений
+  const applyImgFallback = (img) => {
+    if (img.dataset.fallbackApplied) return;
+    img.dataset.fallbackApplied = '1';
+    img.src = 'https://via.placeholder.com/64x64.png?text=U';
+  };
+  document.querySelectorAll('img').forEach((img) => {
+    img.addEventListener('error', () => applyImgFallback(img), { once: true });
+  });
   // Плавный скролл по навигации
   const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
   navLinks.forEach((link) => {
