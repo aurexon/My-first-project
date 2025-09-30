@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Портфолио</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hover-reveal-zone" aria-hidden="true"></div>
+  <header class="site-header" role="navigation" aria-label="Основная навигация">
+    <div class="container">
+      <h1 class="site-title">Моё портфолио</h1>
+      <button class="burger-toggle" type="button" aria-label="Открыть меню" aria-controls="site-menu" aria-expanded="false">☰</button>
+      <nav id="site-menu" class="site-nav" role="navigation">
+        <a href="#skills">Навыки</a>
+        <a href="#about">Обо мне</a>
+        <a href="#projects">Проекты</a>
+        <a href="#interests">Интересы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-pressed="false" title="Переключить тему">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section section-about">
+      <div class="container">
+        <h2>Обо мне</h2>
+        <div class="about">
+          <img class="avatar" src="https://via.placeholder.com/220x220.png?text=Фото" alt="Ваше имя — портрет" width="220" height="220">
+          <div class="about-text">
+            <p>Короткое описание о себе, навыках и интересах. Здесь будет краткая информация, которая помогает понять, чем я занимаюсь.</p>
+            <p>Специализация: нет — всегда открыт чему‑то новому.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section section-skills">
+      <div class="container">
+        <h2>Навыки</h2>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">⚙️</div>
+            <div class="skill-info">
+              <div class="skill-header">
+                <span class="skill-name">Проектирование систем</span>
+                <span class="skill-level">Начинающий</span>
+              </div>
+              <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
+                <span class="skill-progress" style="width:35%"></span>
+              </div>
+            </div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">📐</div>
+            <div class="skill-info">
+              <div class="skill-header">
+                <span class="skill-name">CAD / Чертёж</span>
+                <span class="skill-level">Начинающий</span>
+              </div>
+              <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
+                <span class="skill-progress" style="width:30%"></span>
+              </div>
+            </div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">🤖</div>
+            <div class="skill-info">
+              <div class="skill-header">
+                <span class="skill-name">Мехатроника</span>
+                <span class="skill-level">Начинающий</span>
+              </div>
+              <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">
+                <span class="skill-progress" style="width:25%"></span>
+              </div>
+            </div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">🧪</div>
+            <div class="skill-info">
+              <div class="skill-header">
+                <span class="skill-name">Материаловедение</span>
+                <span class="skill-level">Начинающий</span>
+              </div>
+              <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+                <span class="skill-progress" style="width:20%"></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Проекты</h2>
+        <div class="projects-grid">
+          <article class="card">
+            <h3>Проект 1</h3>
+            <p>Краткое описание проекта. Технологии: HTML, CSS, JS.</p>
+            <a class="button" href="#" aria-label="Открыть Проект 1">Смотреть</a>
+          </article>
+          <article class="card">
+            <h3>Проект 2</h3>
+            <p>Краткое описание проекта. Технологии: React, Node.js.</p>
+            <a class="button" href="#" aria-label="Открыть Проект 2">Смотреть</a>
+          </article>
+          <article class="card">
+            <h3>Проект 3</h3>
+            <p>Краткое описание проекта. Технологии: Python, Flask.</p>
+            <a class="button" href="#" aria-label="Открыть Проект 3">Смотреть</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section section-testimonials">
+      <div class="container">
+        <h2>Отзывы</h2>
+        <div class="carousel" aria-roledescription="carousel">
+          <button class="carousel-btn prev" aria-label="Предыдущий отзыв" data-dir="prev">‹</button>
+          <div class="carousel-viewport" tabindex="0">
+            <ul class="carousel-track">
+              <li class="testimonial card" aria-roledescription="slide">
+                <div class="testimonial-header">
+                  <img class="testimonial-avatar" src="https://via.placeholder.com/64x64.png?text=A" alt="Алексей — аватар" width="64" height="64">
+                  <div>
+                    <div class="testimonial-name">Алексей Петров</div>
+                    <div class="testimonial-role">Коллега</div>
+                  </div>
+                </div>
+                <p>Отличное внимание к деталям и современный подход к интерфейсам. Работа выполнена в срок.</p>
+              </li>
+              <li class="testimonial card" aria-roledescription="slide">
+                <div class="testimonial-header">
+                  <img class="testimonial-avatar" src="https://via.placeholder.com/64x64.png?text=B" alt="Мария — аватар" width="64" height="64">
+                  <div>
+                    <div class="testimonial-name">Мария Смирнова</div>
+                    <div class="testimonial-role">Клиент</div>
+                  </div>
+                </div>
+                <p>Коммуникация на высоте, предложены удачные решения. Результатом очень довольна!</p>
+              </li>
+              <li class="testimonial card" aria-roledescription="slide">
+                <div class="testimonial-header">
+                  <img class="testimonial-avatar" src="https://via.placeholder.com/64x64.png?text=C" alt="Иван — аватар" width="64" height="64">
+                  <div>
+                    <div class="testimonial-name">Иван Кузнецов</div>
+                    <div class="testimonial-role">Партнёр</div>
+                  </div>
+                </div>
+                <p>Грамотное проектирование и стабильная реализация. Рекомендую к сотрудничеству.</p>
+              </li>
+            </ul>
+          </div>
+          <button class="carousel-btn next" aria-label="Следующий отзыв" data-dir="next">›</button>
+        </div>
+        <form class="testimonial-form" action="#" method="post" novalidate>
+          <h3 class="testimonial-form-title">Оставить отзыв</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="t-name">Ваше имя</label>
+              <input id="t-name" name="name" type="text" placeholder="Иван Иванов" required>
+            </div>
+            <div class="form-field">
+              <label for="t-role">Роль</label>
+              <input id="t-role" name="role" type="text" placeholder="Клиент / Коллега" required>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="t-avatar">Ссылка на аватар (необязательно)</label>
+              <input id="t-avatar" name="avatar" type="url" placeholder="https://...">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="t-text">Текст отзыва</label>
+            <textarea id="t-text" name="text" rows="4" placeholder="Короткий отзыв..." required></textarea>
+          </div>
+          <button type="submit" class="button">Отправить отзыв</button>
+          <div class="form-note" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="interests" class="section section-interests">
+      <div class="container">
+        <h2>Интересы</h2>
+        <div class="interests-grid">
+          <article class="interest-card">
+            <div class="interest-icon" aria-hidden="true">🏋️‍♂️</div>
+            <h3 class="interest-title">Спортзал</h3>
+            <p class="interest-text">Силовые тренировки и кардио для баланса.</p>
+          </article>
+          <article class="interest-card interest-books" aria-haspopup="true">
+            <div class="interest-icon" aria-hidden="true">📚</div>
+            <h3 class="interest-title">Книги</h3>
+            <p class="interest-text">Классика приключений и реализма.</p>
+            <div class="interest-reveal" role="region" aria-label="Авторы">
+              <ul>
+                <li>Жюль Верн</li>
+                <li>Виктор Гюго</li>
+                <li>Николай Гоголь</li>
+                <li>Артур Конан Дойл</li>
+              </ul>
+            </div>
+          </article>
+          <article class="interest-card">
+            <div class="interest-icon" aria-hidden="true">🎓</div>
+            <h3 class="interest-title">Учёба</h3>
+            <p class="interest-text">Курсы, практикумы и новые технологии.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="section">
+      <div class="container">
+        <h2>Контакты</h2>
+        <form class="contact-form" action="#" method="post" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Имя</label>
+              <input id="name" name="name" type="text" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message" rows="5" placeholder="Ваше сообщение" required></textarea>
+          </div>
+          <button type="submit" class="button">Отправить</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Ваше имя. Все права защищены.</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
