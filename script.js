@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goTo = (i) => {
       index = (i + slideCount) % slideCount;
       const offset = viewport.clientWidth * index;
-      viewport.scrollTo({ left: offset, behavior: 'smooth' });
+      track.scrollTo({ left: offset, behavior: 'smooth' });
       updateButtons();
     };
 
@@ -46,16 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
     startAuto();
 
     // Пауза при наведении
-    viewport.addEventListener('mouseenter', stopAuto);
-    viewport.addEventListener('mouseleave', startAuto);
+    track.addEventListener('mouseenter', stopAuto);
+    track.addEventListener('mouseleave', startAuto);
 
     // Обновление активного индекса по ручному скроллу
     let scrollTimeout = null;
-    viewport.addEventListener('scroll', () => {
+    track.addEventListener('scroll', () => {
       if (scrollTimeout) clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         const w = viewport.clientWidth;
-        index = Math.round(viewport.scrollLeft / w);
+        index = Math.round(track.scrollLeft / w);
         updateButtons();
       }, 100);
     });
@@ -66,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Клавиатура
     viewport.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { stopAuto(); next(); }
+      if (e.key === 'ArrowLeft') { stopAuto(); prev(); }
+    });
+    track.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') { stopAuto(); next(); }
       if (e.key === 'ArrowLeft') { stopAuto(); prev(); }
     });
